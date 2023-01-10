@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        backgroundColor: const Color(0xFFBC7CF9),
+        backgroundColor: const Color(0xFF6667AB),
         child: Icon(
           Icons.add_box_outlined,
           size: 30,
@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Icons.home_outlined,
                             size: 32,
                             color: currentTab == 0
-                                ? Color(0xFFBC7CF9)
+                                ? Color(0xFF6667AB)
                                 : Colors.black54,
                           )
                         ],
@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Icons.dashboard_rounded,
                             size: 30,
                             color: currentTab == 1
-                                ? const Color(0xFFBC7CF9)
+                                ? const Color(0xFF6667AB)
                                 : Colors.black54,
                           )
                         ],
@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Icons.notifications_active_outlined,
                             size: 30,
                             color: currentTab == 2
-                                ? Color(0xFFBC7CF9)
+                                ? Color(0xFF6667AB)
                                 : Colors.black54,
                           )
                         ],
@@ -142,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Icons.person_outline_rounded,
                             size: 30,
                             color: currentTab == 3
-                                ? Color(0xFFBC7CF9)
+                                ? Color(0xFF6667AB)
                                 : Colors.black54,
                           )
                         ],

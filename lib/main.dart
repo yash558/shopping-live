@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shoppinglive/screens/home_screen.dart';
 import 'package:shoppinglive/screens/login_screen.dart';
+import 'package:shoppinglive/screens/signup_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: const HomeScreen(),
+      home: const SignUpScreen(),
     );
   }
 }

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shoppinglive/colors/color.dart';
-import 'package:shoppinglive/screens/signup_screen.dart';
-import 'package:shoppinglive/widgets/widget.dart';
+import 'package:shoppinglive/screens/login_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+import '../widgets/widget.dart';
+
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   bool showPassword = true;
   @override
   Widget build(BuildContext context) {
@@ -20,12 +21,12 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(top: 110.0),
+              padding: const EdgeInsets.only(top: 40.0),
               child: Center(
                 child: SizedBox(
-                  width: 500,
-                  height: 300,
-                  child: Image.asset("assets/bg.jpg"),
+                  width: 600,
+                  height: 320,
+                  child: Image.asset("assets/signup1.jpg"),
                 ),
               ),
             ),
@@ -33,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
               alignment: AlignmentDirectional.topStart,
               padding: const EdgeInsets.only(left: 30),
               child: const Text(
-                "Login",
+                "Sign Up",
                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
               ),
             ),
@@ -45,12 +46,21 @@ class _LoginScreenState extends State<LoginScreen> {
               child: TextField(
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(),
-                  hintText: 'Email id',
-                  icon: Icon(
-                    Icons.email_outlined,
-                    color: Color(0xFF1B1D22),
-                  ),
+                  hintText: 'Username',
+                  icon: Icon(Icons.person_outlined),
                 ),
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              child: TextField(
+                decoration: InputDecoration(
+                    border: UnderlineInputBorder(),
+                    hintText: 'Email id',
+                    icon: Icon(Icons.email_outlined)),
               ),
             ),
             Padding(
@@ -62,10 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 decoration: InputDecoration(
                   border: const UnderlineInputBorder(),
                   hintText: 'Password',
-                  icon: const Icon(
-                    Icons.lock_outline_rounded,
-                    color: Color(0xFF1B1D22),
-                  ),
+                  icon: const Icon(Icons.lock_outline_rounded),
                   suffix: IconButton(
                     onPressed: () {
                       setState(() {
@@ -83,28 +90,27 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            Container(
-              alignment: AlignmentDirectional.topEnd,
-              margin: const EdgeInsets.only(right: 20),
-              child: TextButton(
-                onPressed: () {},
-                child: const Text(
-                  "Forgot Password?",
-                  style: TextStyle(
-                      fontSize: 15, color: Colors.black54, fontFamily: 'inter'),
-                ),
-              ),
-            ),
+            // Container(
+            //   alignment: AlignmentDirectional.topEnd,
+            //   margin: const EdgeInsets.only(right: 20),
+            //   child: TextButton(
+            //     onPressed: () {},
+            //     child: const Text(
+            //       "Forgot Password?",
+            //       style: TextStyle(fontSize: 15, color: Colors.black54),
+            //     ),
+            //   ),
+            // ),
             const SizedBox(
-              height: 10,
+              height: 40,
             ),
             Container(
               height: 50,
               width: 370,
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              padding: const EdgeInsets.fromLTRB(15, 0, 10, 0),
               child: ElevatedButton(
                 child: const Text(
-                  'Login',
+                  'Sign Up',
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 onPressed: () {},
@@ -184,14 +190,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const SignUpScreen(),
+                          builder: (context) => const LoginScreen(),
                         ),
                       );
                     }),
                     child: const Padding(
-                      padding: EdgeInsets.only(left: 4.0),
+                      padding: EdgeInsets.only(left: 8.0),
                       child: Text(
-                        "SignUp",
+                        "Login",
                         style: TextStyle(
                             color: Color(0xFF6667AB),
                             fontSize: 14,
