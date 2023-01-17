@@ -230,7 +230,38 @@ class _LiveProductState extends State<LiveProduct> {
                               backgroundColor: const Color(0xFF6667AB),
                             ),
                             onPressed: () {},
-                            child: const Text("Add Product")))
+                            child: const Text("Add Product"))),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 10.0),
+                            child: Container(
+                              height: 1.0,
+                              width: 170.0,
+                              color: Colors.black45,
+                            ),
+                          ),
+                          const Text(
+                            'or',
+                            style: TextStyle(
+                                fontSize: 20.0, color: Colors.black45),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 10.0),
+                            child: Container(
+                              height: 1.0,
+                              width: 170.0,
+                              color: Colors.black45,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 )),
               ],

@@ -1,16 +1,15 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:shoppinglive/screens/gallery_screen.dart';
-import 'package:shoppinglive/screens/home.dart';
+
 import 'package:shoppinglive/screens/liveProduct.dart';
 import 'package:shoppinglive/screens/notification_screen.dart';
-import 'package:shoppinglive/screens/profile.dart';
-import 'package:shoppinglive/widgets/CategoriesWidget.dart';
+import 'package:shoppinglive/screens/profile/profile_screen.dart';
+
 import 'package:shoppinglive/widgets/itemsWidget.dart';
 import 'package:shoppinglive/widgets/upcomingLive.dart';
 
 class HomeScreen extends StatefulWidget {
+  static const routeName = '/home';
   const HomeScreen({super.key});
 
   @override
@@ -26,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const GalleryScreen()
   ];
 
-  Widget currentScreen = const Home();
+  Widget currentScreen = const HomeScreen();
   final PageStorageBucket bucket = PageStorageBucket();
 
   @override
@@ -58,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
           const ItemsWidget(),
           Container(
             alignment: Alignment.topLeft,
-            margin: const EdgeInsets.only(left: 24),
+            margin: const EdgeInsets.only(left: 24, top: 12),
             child: const Text(
               "Upcoming Live",
               style: TextStyle(
@@ -86,133 +85,116 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Container(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 0.5, sigmaY: 0.5),
-          child: Container(
-            height: 90,
-            // decoration: BoxDecoration(
-            //   color: Colors.white.withOpacity(0.5),
-            // ),
-            child: Container(
-              margin: const EdgeInsets.only(
-                  right: 20, bottom: 14, top: 14, left: 12),
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: BottomAppBar(
-                shape: const CircularNotchedRectangle(),
-                notchMargin: 7,
-                child: SizedBox(
-                  width: 20,
-                  height: 60,
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+        decoration: const BoxDecoration(color: Colors.transparent),
+        child: BottomAppBar(
+          shape: const CircularNotchedRectangle(),
+          notchMargin: 7,
+          child: SizedBox(
+            height: 60,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      MaterialButton(
+                        padding: const EdgeInsets.only(left: 40),
+                        minWidth: 32,
+                        onPressed: () {
+                          setState(() {
+                            currentScreen = const HomeScreen();
+                            currentTab = 0;
+                          });
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            MaterialButton(
-                              padding: const EdgeInsets.only(left: 40),
-                              minWidth: 32,
-                              onPressed: () {
-                                setState(() {
-                                  currentScreen = const HomeScreen();
-                                  currentTab = 0;
-                                });
-                              },
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    "assets/home.png",
-                                    height: 27,
-                                    width: 27,
-                                    color: currentTab == 0
-                                        ? const Color(0xFF6667AB)
-                                        : Colors.black54,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            MaterialButton(
-                              padding: const EdgeInsets.only(left: 40),
-                              onPressed: () {
-                                setState(() {
-                                  currentScreen = const GalleryScreen();
-                                  currentTab = 1;
-                                });
-                              },
-                              minWidth: 32,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    "assets/dashboard.png",
-                                    height: 27,
-                                    width: 27,
-                                    color: currentTab == 1
-                                        ? const Color(0xFF6667AB)
-                                        : Colors.black54,
-                                  )
-                                ],
-                              ),
+                            Image.asset(
+                              "assets/home.png",
+                              height: 27,
+                              width: 27,
+                              color: currentTab == 0
+                                  ? const Color(0xFF6667AB)
+                                  : Colors.black54,
                             ),
                           ],
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                      ),
+                      MaterialButton(
+                        padding: const EdgeInsets.only(left: 40),
+                        onPressed: () {
+                          setState(() {
+                            currentScreen = const GalleryScreen();
+                            currentTab = 1;
+                          });
+                        },
+                        minWidth: 32,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            MaterialButton(
-                              padding: const EdgeInsets.only(right: 40),
-                              onPressed: () {
-                                setState(() {
-                                  currentScreen = const NotificationScreen();
-                                  currentTab = 2;
-                                });
-                              },
-                              minWidth: 32,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    "assets/notification.png",
-                                    height: 27,
-                                    width: 27,
-                                    color: currentTab == 2
-                                        ? const Color(0xFF6667AB)
-                                        : Colors.black54,
-                                  )
-                                ],
-                              ),
-                            ),
-                            MaterialButton(
-                              padding: const EdgeInsets.only(right: 20),
-                              onPressed: () {
-                                setState(() {
-                                  currentScreen = const ProfileScreen();
-                                  currentTab = 3;
-                                });
-                              },
-                              minWidth: 32,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    "assets/profile.png",
-                                    height: 35,
-                                    width: 35,
-                                    color: currentTab == 3
-                                        ? const Color(0xFF6667AB)
-                                        : Colors.black54,
-                                  )
-                                ],
-                              ),
+                            Image.asset(
+                              "assets/dashboard.png",
+                              height: 27,
+                              width: 27,
+                              color: currentTab == 1
+                                  ? const Color(0xFF6667AB)
+                                  : Colors.black54,
                             )
                           ],
-                        )
-                      ]),
-                ),
-              ),
-            ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      MaterialButton(
+                        padding: const EdgeInsets.only(right: 40),
+                        onPressed: () {
+                          setState(() {
+                            currentScreen = const NotificationScreen();
+                            currentTab = 2;
+                          });
+                        },
+                        minWidth: 32,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              "assets/notification.png",
+                              height: 27,
+                              width: 27,
+                              color: currentTab == 2
+                                  ? const Color(0xFF6667AB)
+                                  : Colors.black54,
+                            )
+                          ],
+                        ),
+                      ),
+                      MaterialButton(
+                        padding: const EdgeInsets.only(right: 40),
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(
+                              context, ProfileScreen.routeName);
+                        },
+                        minWidth: 32,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              "assets/profile.png",
+                              height: 35,
+                              width: 35,
+                              color: currentTab == 3
+                                  ? const Color(0xFF6667AB)
+                                  : Colors.black54,
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  )
+                ]),
           ),
         ),
       ),

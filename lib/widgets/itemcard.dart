@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoppinglive/widgets/alertbox.dart';
 
 class ItemCard extends StatelessWidget {
   final String title, subtitle;
@@ -76,7 +77,13 @@ class ItemCard extends StatelessWidget {
                   ],
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return RoundedAlertBox();
+                        });
+                  },
                   child: Padding(
                     padding: const EdgeInsets.only(top: 4),
                     child: Image.asset(

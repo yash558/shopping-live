@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shoppinglive/colors/color.dart';
+import 'package:shoppinglive/resources/auth_methods.dart';
+import 'package:shoppinglive/screens/home_screen.dart';
 import 'package:shoppinglive/screens/login_screen.dart';
 
 import '../widgets/widget.dart';
@@ -14,6 +16,26 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   bool showPassword = true;
+  final TextEditingController usernameEditingController =
+      TextEditingController();
+  final TextEditingController emailEditingController = TextEditingController();
+  final TextEditingController passwordEditingController =
+      TextEditingController();
+  final AuthMethods _authMethods = AuthMethods();
+
+  void signUpUser() async {
+    bool res = await _authMethods.signUpUser(
+        context,
+        emailEditingController.text,
+        usernameEditingController.text,
+        passwordEditingController.text);
+
+    if (res) {
+      // ignore: use_build_context_synchronously
+      Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,10 +63,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
             const SizedBox(
               height: 15,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              child: TextField(
-                decoration: InputDecoration(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: TextFormField(
+                controller: usernameEditingController,
+                keyboardType: TextInputType.name,
+                onSaved: (value) {
+                  usernameEditingController.text = value!;
+                },
+                autofocus: false,
+                textInputAction: TextInputAction.next,
+                decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
                   hintText: 'Username',
                   icon: Icon(Icons.person_outlined),
@@ -54,10 +83,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
             const SizedBox(
               height: 15,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              child: TextField(
-                decoration: InputDecoration(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: TextFormField(
+                controller: emailEditingController,
+                textInputAction: TextInputAction.next,
+                autofocus: false,
+                decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
                     hintText: 'Email id',
                     icon: Icon(Icons.email_outlined)),
@@ -67,8 +99,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
               padding: const EdgeInsets.symmetric(
                 horizontal: 30,
               ),
-              child: TextField(
+              child: TextFormField(
+                controller: passwordEditingController,
                 obscureText: showPassword,
+                textInputAction: TextInputAction.next,
+                onSaved: (value) {
+                  passwordEditingController.text = value!;
+                },
                 decoration: InputDecoration(
                   border: const UnderlineInputBorder(),
                   hintText: 'Password',
@@ -90,14 +127,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
             ),
-            // Container(
-            //   alignment: AlignmentDirectional.topEnd,
-            //   margin: const EdgeInsets.only(right: 20),
-            //   child: TextButton(
-            //     onPressed: () {},
-            //     child: const Text(
-            //       "Forgot Password?",
-            //       style: TextStyle(fontSize: 15, color: Colors.black54),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(
+            //     horizontal: 30,
+            //   ),
+            //   child: TextFormField(
+            //     textInputAction: TextInputAction.done,
+            //     onSaved: (value) {
+            //       confirmPasswordEditingController.text = value!;
+            //     },
+            //     controller: confirmPasswordEditingController,
+            //     obscureText: showPassword,
+            //     decoration: InputDecoration(
+            //       border: const UnderlineInputBorder(),
+            //       hintText: 'Confirm Password',
+            //       icon: const Icon(Icons.lock_outline_rounded),
+            //       suffix: IconButton(
+            //         onPressed: () {
+            //           setState(() {
+            //             if (showPassword) {
+            //               showPassword = false;
+            //             } else {
+            //               showPassword = true;
+            //             }
+            //           });
+            //         },
+            //         icon: Icon(showPassword == true
+            //             ? Icons.remove_red_eye_outlined
+            //             : Icons.password),
+            //       ),
             //     ),
             //   ),
             // ),
@@ -108,18 +166,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: 50,
               width: 370,
               padding: const EdgeInsets.fromLTRB(15, 0, 10, 0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+              ),
               child: ElevatedButton(
+                onPressed: signUpUser,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF6667AB),
+                ),
                 child: const Text(
                   'Sign Up',
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF6667AB),
-                ),
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
               ),
             ),
             Padding(

@@ -1,6 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shoppinglive/colors/color.dart';
+import 'package:shoppinglive/resources/auth_methods.dart';
+import 'package:shoppinglive/screens/home_screen.dart';
 import 'package:shoppinglive/screens/signup_screen.dart';
 import 'package:shoppinglive/widgets/widget.dart';
 
@@ -12,6 +16,21 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+
+  // editing controller
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final AuthMethods _authMethods = AuthMethods();
+
+  loginUser() async {
+    bool res = await _authMethods.loginUser(
+        context, emailController.text, passwordController.text);
+    if (res) {
+      Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+    }
+  }
+
   bool showPassword = true;
   @override
   Widget build(BuildContext context) {
@@ -40,10 +59,12 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: 15,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              child: TextField(
-                decoration: InputDecoration(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: TextFormField(
+                keyboardType: TextInputType.emailAddress,
+                controller: emailController,
+                decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
                   hintText: 'Email id',
                   icon: Icon(
@@ -51,16 +72,25 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Color(0xFF1B1D22),
                   ),
                 ),
+                onSaved: (value) {
+                  emailController.text = value!;
+                },
+                textInputAction: TextInputAction.next,
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 30,
-              ),
-              child: TextField(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+              child: TextFormField(
+                autofocus: false,
+                controller: passwordController,
+                onSaved: (value) {
+                  passwordController.text = value!;
+                },
+                textInputAction: TextInputAction.done,
                 obscureText: showPassword,
                 decoration: InputDecoration(
                   border: const UnderlineInputBorder(),
+                  contentPadding: const EdgeInsets.only(bottom: 6),
                   hintText: 'Password',
                   icon: const Icon(
                     Icons.lock_outline_rounded,
@@ -102,18 +132,18 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 50,
               width: 370,
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+              ),
               child: ElevatedButton(
+                onPressed: loginUser,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF6667AB),
+                ),
                 child: const Text(
                   'Login',
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF6667AB),
-                ),
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
               ),
             ),
             Padding(

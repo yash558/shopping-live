@@ -7,33 +7,42 @@ class ItemsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      childAspectRatio: 0.77,
-      crossAxisCount: 2,
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      children: const [
-        ItemCard(
-          title: "Yuzi_20",
-          subtitle: "Artist",
-          index: 1,
-        ),
-        ItemCard(
-          title: "Alice_rip",
-          subtitle: "Wallets",
-          index: 2,
-        ),
-        ItemCard(
-          title: "cris_345",
-          subtitle: "shoes",
-          index: 3,
-        ),
-        ItemCard(
-          title: "Jack zones",
-          subtitle: "Makeup Product",
-          index: 4,
-        ),
-      ],
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+      ),
+      child: GridView.count(
+        childAspectRatio: MediaQuery.of(context).size.width /
+            (MediaQuery.of(context).size.height / 1.3),
+        crossAxisCount: 2,
+        physics: const NeverScrollableScrollPhysics(),
+        crossAxisSpacing: 2,
+        mainAxisSpacing: 2.0,
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        children: const [
+          ItemCard(
+            title: "Yuzi_20",
+            subtitle: "Artist",
+            index: 1,
+          ),
+          ItemCard(
+            title: "Alice_rip",
+            subtitle: "Wallets",
+            index: 2,
+          ),
+          ItemCard(
+            title: "cris_345",
+            subtitle: "shoes",
+            index: 3,
+          ),
+          ItemCard(
+            title: "Jack zones",
+            subtitle: "Makeup Product",
+            index: 4,
+          ),
+        ],
+      ),
     );
   }
 }
