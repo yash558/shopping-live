@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
             BusinessLiveScreen.routeName: (context) => const BusinessLiveScreen(),
             BusinessFollower.routeName: (context) => const BusinessFollower(),
           },
-          home: const HomeScreen(),
+          home: const SignUpScreen(),
         ),
       );
 }
