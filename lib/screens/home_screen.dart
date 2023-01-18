@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shoppinglive/screens/business/businnes_profile_live.dart';
 import 'package:shoppinglive/screens/gallery_screen.dart';
 
-import 'package:shoppinglive/screens/liveProduct.dart';
+import 'package:shoppinglive/screens/profile/onlive/liveProduct.dart';
 import 'package:shoppinglive/screens/notification_screen.dart';
 import 'package:shoppinglive/screens/profile/profile_screen.dart';
 
@@ -175,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.only(right: 40),
                         onPressed: () {
                           Navigator.pushReplacementNamed(
-                              context, ProfileScreen.routeName);
+                              context, BusinessLiveScreen.routeName);
                         },
                         minWidth: 32,
                         child: Column(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:shoppinglive/colors/color.dart';
 import 'package:shoppinglive/resources/auth_methods.dart';
+import 'package:shoppinglive/resources/google_sign_in.dart';
 import 'package:shoppinglive/screens/home_screen.dart';
 import 'package:shoppinglive/screens/login_screen.dart';
 
@@ -21,14 +23,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController emailEditingController = TextEditingController();
   final TextEditingController passwordEditingController =
       TextEditingController();
+  final TextEditingController userTypeController = TextEditingController();
   final AuthMethods _authMethods = AuthMethods();
-
+  var items = [
+    'Business Owner',
+    'Customer',
+  ];
   void signUpUser() async {
     bool res = await _authMethods.signUpUser(
-        context,
-        emailEditingController.text,
-        usernameEditingController.text,
-        passwordEditingController.text);
+      context,
+      emailEditingController.text,
+      usernameEditingController.text,
+      passwordEditingController.text,
+      userTypeController.text,
+    );
 
     if (res) {
       // ignore: use_build_context_synchronously
@@ -127,38 +135,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(
-            //     horizontal: 30,
-            //   ),
-            //   child: TextFormField(
-            //     textInputAction: TextInputAction.done,
-            //     onSaved: (value) {
-            //       confirmPasswordEditingController.text = value!;
-            //     },
-            //     controller: confirmPasswordEditingController,
-            //     obscureText: showPassword,
-            //     decoration: InputDecoration(
-            //       border: const UnderlineInputBorder(),
-            //       hintText: 'Confirm Password',
-            //       icon: const Icon(Icons.lock_outline_rounded),
-            //       suffix: IconButton(
-            //         onPressed: () {
-            //           setState(() {
-            //             if (showPassword) {
-            //               showPassword = false;
-            //             } else {
-            //               showPassword = true;
-            //             }
-            //           });
-            //         },
-            //         icon: Icon(showPassword == true
-            //             ? Icons.remove_red_eye_outlined
-            //             : Icons.password),
-            //       ),
-            //     ),
-            //   ),
-            // ),
+            const SizedBox(
+              height: 15,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 30,
+              ),
+              child: TextFormField(
+                controller: userTypeController,
+                decoration: InputDecoration(
+                  icon: const Icon(Icons.people_outline),
+                  hintText: "Join Business owner / Customer",
+                  suffixIcon: PopupMenuButton<String>(
+                    icon: const Icon(Icons.arrow_drop_down),
+                    onSelected: (String value) {
+                      userTypeController.text = value;
+                    },
+                    itemBuilder: (BuildContext context) {
+                      return items.map<PopupMenuItem<String>>((String value) {
+                        return PopupMenuItem(value: value, child: Text(value));
+                      }).toList();
+                    },
+                  ),
+                ),
+              ),
+            ),
             const SizedBox(
               height: 40,
             ),
@@ -223,7 +225,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     googleColor,
                     FontAwesomeIcons.googlePlusG,
                     iconColor: Colors.white,
-                    onTap: () {},
+                    onTap: () {
+                      final provider = Provider.of<GoogleSignInProvider>(
+                          context,
+                          listen: false);
+                      provider.googleLogin();
+                    },
                   ),
                   CustomWidgets.socialButtonCircle(
                     linkedinColor,

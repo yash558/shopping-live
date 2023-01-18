@@ -3,17 +3,17 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:shoppinglive/screens/profile/follower/cartitem_sample.dart';
 
-class FollowerCart extends StatelessWidget {
-  const FollowerCart({super.key});
+class BusinessCart extends StatelessWidget {
+  const BusinessCart({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 500,
       padding: const EdgeInsets.only(top: 15),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
+      decoration: BoxDecoration(
+        color: Colors.grey.withOpacity(0.3),
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(10),
           topRight: Radius.circular(10),
         ),

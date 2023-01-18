@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:shoppinglive/screens/profile/onlive/productview.dart';
 
 class LiveProduct extends StatefulWidget {
   const LiveProduct({super.key});
@@ -262,6 +263,60 @@ class _LiveProductState extends State<LiveProduct> {
                         ],
                       ),
                     ),
+                    Container(
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.only(left: 15, top: 12),
+                            alignment: Alignment.bottomLeft,
+                            child: const Text(
+                              "Product View",
+                              style: TextStyle(
+                                  color: Color(0xFF6667AB), fontSize: 20),
+                            ),
+                          ),
+                          const ProductView(),
+                          const ProductView(),
+                          Container(
+                            height: 80,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  width: 160,
+                                  height: 50,
+                                  padding: const EdgeInsets.only(
+                                    left: 18.0,
+                                  ),
+                                  child: ElevatedButton(
+                                    onPressed: () {},
+                                    child: const Text(
+                                      "Schedule",
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: 160,
+                                  height: 50,
+                                  padding: const EdgeInsets.only(right: 18.0),
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            const Color(0xFF6667AB),
+                                      ),
+                                      onPressed: () {},
+                                      child: const Text(
+                                        "Go Live",
+                                        style: TextStyle(fontSize: 20),
+                                      )),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    )
                   ],
                 )),
               ],
